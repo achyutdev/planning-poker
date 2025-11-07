@@ -1,6 +1,87 @@
 # Planning Poker - Agile Scrum Estimation Tool
 
-A real-time planning poker application for agile scrum teams to estimate story points collaboratively.
+# Planning Poker
+
+A real-time planning poker application for agile scrum teams.
+
+## Features
+
+- 🎯 Real-time voting with WebSocket connections
+- ⏱️ Customizable countdown timer (default: 15 seconds)
+- 🎨 Professional, modern UI with animations
+- 📊 Voting history with statistics (Average, Min, Max)
+- 👥 Live participant tracking
+- 🎉 Auto-reveal when all team members vote
+- 📱 Fully responsive design
+- 🔒 Session-based rooms with unique IDs
+
+## Local Development
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start the server:
+```bash
+npm start
+```
+
+3. Open your browser to `http://localhost:3000`
+
+## Deployment
+
+### Deploy to Render (Recommended - Free)
+
+1. Push your code to GitHub
+2. Go to [Render.com](https://render.com) and sign up
+3. Click "New +" → "Web Service"
+4. Connect your GitHub repository
+5. Render will auto-detect the configuration from `render.yaml`
+6. Click "Create Web Service"
+
+Your app will be live at: `https://your-app-name.onrender.com`
+
+### Deploy to Railway (Free $5/month credit)
+
+1. Push your code to GitHub
+2. Go to [Railway.app](https://railway.app)
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your repository
+5. Railway will auto-detect Node.js and deploy
+
+### Deploy to Fly.io (Free tier available)
+
+1. Install Fly CLI: `curl -L https://fly.io/install.sh | sh`
+2. Login: `fly auth login`
+3. Launch: `fly launch`
+4. Deploy: `fly deploy`
+
+## Environment Variables
+
+- `PORT`: Server port (default: 3000)
+- `NODE_ENV`: Environment (development/production)
+
+## Tech Stack
+
+- **Backend**: Node.js, Express, Socket.IO
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3
+- **Real-time**: WebSocket connections
+- **Design**: Google Fonts (Inter), CSS Variables, Animations
+
+## How to Use
+
+1. **Create a Session**: Enter your name and click "Start New Planning Session"
+2. **Share the Link**: Copy and share the session link with your team
+3. **Start Voting**: Enter a story name, set timer, and click "Start Voting"
+4. **Team Votes**: Each member selects their estimate (Fibonacci sequence)
+5. **View Results**: Votes are revealed when timer ends or everyone votes
+6. **History**: View past estimations with statistics
+
+## License
+
+MIT
+
 
 ## Features
 
