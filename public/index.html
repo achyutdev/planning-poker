@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning Poker - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #667eea;
+      --secondary-color: #764ba2;
+      --success-color: #10b981;
+      --danger-color: #ef4444;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-light: #f3f4f6;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+      --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+    
+    .container {
+      background: var(--bg-primary);
+      border-radius: 20px;
+      padding: 56px;
+      box-shadow: var(--shadow-xl);
+      max-width: 540px;
+      width: 100%;
+      animation: slideIn 0.4s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .icon {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 24px;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    h1 {
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    
+    .form-group {
+      margin-bottom: 28px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+    }
+    
+    input[type="text"]:hover {
+      border-color: var(--primary-color);
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+      background: var(--bg-primary);
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-secondary);
+      border-color: var(--text-secondary);
+      transform: translateY(-1px);
+    }
+    
+    .divider {
+      text-align: center;
+      margin: 36px 0;
+      color: var(--text-secondary);
+      position: relative;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: var(--border-color);
+    }
+    
+    .divider::before {
+      left: 0;
+    }
+    
+    .divider::after {
+      right: 0;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: var(--bg-primary);
+      padding: 48px;
+      border-radius: 16px;
+      max-width: 540px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+      animation: modalSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes modalSlideIn {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .modal h2 {
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    .modal p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+    
+    .share-link {
+      background: var(--bg-light);
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 24px 0;
+      word-break: break-all;
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      color: var(--primary-color);
+      font-weight: 600;
+      border: 2px solid var(--border-color);
+      font-size: 0.9375rem;
+    }
+    
+    .copy-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 8px 6px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .copy-btn:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+    
+    .modal-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 32px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .modal-content {
+        padding: 32px 24px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+      }
+      
+      .container {
+        padding: 32px 24px;
+      }
+      
+      h1 {
+        font-size: 1.75rem;
+      }
+      
+      .icon {
+        font-size: 3rem;
+      }
+      
+      .modal-content {
+        padding: 24px 20px;
+      }
+      
+      .copy-btn {
+        width: 100%;
+        margin: 6px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">🃏</div>
+    <h1>Planning Poker</h1>
+    <p class="subtitle">Agile Story Point Estimation</p>
+    
+    <div class="form-group">
+      <label for="facilitatorName">Your Name</label>
+      <input type="text" id="facilitatorName" placeholder="Enter your name" required>
+    </div>
+    
+    <button class="btn btn-primary" onclick="createSession()">Start New Planning Session</button>
+    
+    <div class="divider">OR</div>
+    
+    <div class="form-group">
+      <label for="sessionId">Session ID</label>
+      <input type="text" id="sessionId" placeholder="Enter session ID to join">
+    </div>
+    
+    <button class="btn btn-secondary" onclick="joinSession()">Join Existing Session</button>
+  </div>
+  
+  <div id="shareModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">🎉</div>
+      <h2>Session Created!</h2>
+      <p>Share this link with your team members:</p>
+      <div class="share-link" id="shareLink"></div>
+      <button class="copy-btn" onclick="copyLink()">📋 Copy Link</button>
+      <button class="copy-btn" onclick="goToSession()">🚀 Go to Session</button>
+    </div>
+  </div>
+  
+  <script>
+    let currentSessionData = null;
+    
+    async function createSession() {
+      const facilitatorName = document.getElementById('facilitatorName').value.trim();
+      
+      if (!facilitatorName) {
+        alert('Please enter your name');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/create-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ facilitatorName })
+        });
+        
+        const data = await response.json();
+        currentSessionData = data;
+        
+        document.getElementById('shareLink').textContent = data.url;
+        document.getElementById('shareModal').classList.add('active');
+      } catch (error) {
+        alert('Failed to create session. Please try again.');
+        console.error(error);
+      }
+    }
+    
+    function joinSession() {
+      const sessionId = document.getElementById('sessionId').value.trim();
+      const userName = document.getElementById('facilitatorName').value.trim();
+      
+      if (!sessionId) {
+        alert('Please enter a session ID');
+        return;
+      }
+      
+      if (!userName) {
+        alert('Please enter your name');
+        return;
+      }
+      
+      window.location.href = `/session/${sessionId}?name=${encodeURIComponent(userName)}`;
+    }
+    
+    function copyLink() {
+      const link = document.getElementById('shareLink').textContent;
+      navigator.clipboard.writeText(link).then(() => {
+        alert('Link copied to clipboard!');
+      });
+    }
+    
+    function goToSession() {
+      if (currentSessionData) {
+        window.location.href = `/session/${currentSessionData.sessionId}?facilitator=true&name=${encodeURIComponent(document.getElementById('facilitatorName').value)}`;
+      }
+    }
+  </script>
+</body>
+</html>
